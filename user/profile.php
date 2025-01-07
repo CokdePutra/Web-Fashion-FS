@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             src="<?php echo $user['profile_picture'] ? $user['profile_picture'] : '../img/aksesoris/jepitan-rambut-wanita-set.png'; ?>"
             alt="Profile Picture" />
           <form method="POST" action="" enctype="multipart/form-data">
-            <input type="file" name="profile_picture" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors" />
+            <input type="file" name="profile_picture" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors" onchange="showSaveButton()" />
         </div>
         <div class="flex-grow">
           <div class="mb-6">
@@ -207,6 +207,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         const hasChanges = JSON.stringify(initialData) !== JSON.stringify(currentData);
         document.getElementById('saveButton').classList.toggle('hidden', !hasChanges);
+      }
+
+      function showSaveButton() {
+        document.getElementById('saveButton').classList.remove('hidden');
       }
     </script>
   </div>
