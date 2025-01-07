@@ -23,7 +23,7 @@ if ($cek_row_user > 0) {
     location.href='regis.php';
     </script>";
 } else {
-    $query = "INSERT INTO tb_user VALUE ('','$name', '$email', '$pws_encript', '$no_telp','','','','user')";
+    $query = "INSERT INTO tb_user VALUE ('NULL','$name', '$email', '$pws_encript', '$no_telp','','','','','user')";
     $result = mysqli_query($koneksi, $query);
 
     if (!$result) {

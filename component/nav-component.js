@@ -37,6 +37,9 @@ class NavComponent extends HTMLElement {
         <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.php'">
           <img src="../img/icon/cart.png" alt="Cart" class="h-6" />
         </button>
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="confirmLogout()">
+          <img src="../img/icon/logout.png" alt="Logout" class="h-6" />
+        </button>
       </div>
       <!-- Links Section -->
       <div class="flex items-center space-x-4 hidden md:block">
@@ -61,6 +64,9 @@ class NavComponent extends HTMLElement {
         <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.php'">
           <img src="../img/icon/cart.png" alt="Cart" class="h-6" />
         </button>
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="confirmLogout()">
+          <img src="../img/icon/logout.png" alt="Logout" class="h-6" />
+        </button>
       </div>
     </nav>`;
 
@@ -71,4 +77,11 @@ class NavComponent extends HTMLElement {
     });
   }
 }
+
+function confirmLogout() {
+  if (confirm("Apakah Anda yakin untuk logout?")) {
+    window.location.href = "../auth/logout.php";
+  }
+}
+
 customElements.define("nav-component", NavComponent);
