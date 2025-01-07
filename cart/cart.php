@@ -18,9 +18,7 @@ $result = mysqli_query($koneksi, $query);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shopping Cart</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     body {
       background-color: #fcf0ec;
@@ -54,9 +52,7 @@ $result = mysqli_query($koneksi, $query);
 
 <body>
   <nav-component></nav-component>
-  <div
-    id="root"
-    class="container mx-auto p-6 px-16 bg-white shadow-md rounded-lg">
+  <div id="root" class="container mx-auto p-6 px-16 bg-white shadow-md rounded-lg">
     <div id="cart-items-container">
       <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <div class="md:flex items-center justify-between border-b pb-4 mb-4 cart-item" data-id-cart="<?php echo $row['id_cart']; ?>">
@@ -77,13 +73,8 @@ $result = mysqli_query($koneksi, $query);
       <?php } ?>
     </div>
     <div class="flex justify-end items-center mt-4 gap-4">
-      <span class="text-xl font-semibold">Total (<span id="total-items">0</span> Produk):
-        <span id="total-price">Rp 0</span></span>
-      <button
-        class="checkout px-6 py-2 text-white rounded-xl"
-        onclick="proceedToCheckout()">
-        Checkout
-      </button>
+      <span class="text-xl font-semibold">Total (<span id="total-items">0</span> Produk): <span id="total-price">Rp 0</span></span>
+      <button class="checkout px-6 py-2 text-white rounded-xl" onclick="proceedToCheckout()">Checkout</button>
     </div>
   </div>
   <footer-component></footer-component>
@@ -100,7 +91,7 @@ $result = mysqli_query($koneksi, $query);
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "update_cart.php", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.send(`product_id=${cartId}&quantity=${currentQuantity}`);
+      xhr.send(`id_cart=${cartId}&quantity=${currentQuantity}`);
     }
 
     function confirmRemoveItem(button) {
@@ -139,32 +130,33 @@ $result = mysqli_query($koneksi, $query);
 
     function formatPrice(price) {
       return new Intl.NumberFormat("id-ID", {
-          style: "currency",
-          currency: "IDR",
-          minimumFractionDigits: 0,
-        })
-        .format(price)
-        .replace("IDR", "Rp ");
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(price).replace("Rp", "Rp ");
     }
 
     function proceedToCheckout() {
       const cartItems = [];
       document.querySelectorAll(".cart-item").forEach((item) => {
-        const image = item.querySelector("img").src;
-        const name = item.querySelector("h3").textContent;
-        const color = item.querySelector(".item-color").textContent;
-        const price = parseInt(item.querySelector(".item-price").dataset.price);
-        const quantity = parseInt(item.querySelector(".item-quantity").textContent);
-        cartItems.push({
-          image,
-          name,
-          color,
-          price,
-          quantity
-        });
+        const checkbox = item.querySelector("input[type='checkbox']");
+        if (checkbox.checked) {
+          const image = item.querySelector("img").src;
+          const name = item.querySelector("h3").textContent;
+          const color = item.querySelector(".item-color").textContent;
+          const price = parseInt(item.querySelector(".item-price").dataset.price);
+          const quantity = parseInt(item.querySelector(".item-quantity").textContent);
+          cartItems.push({
+            image,
+            name,
+            color,
+            price,
+            quantity
+          });
+        }
       });
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      window.location.href = "../cart/pembayaran.html";
+      window.location.href = "../cart/pembayaran.php";
     }
 
     document.addEventListener("DOMContentLoaded", () => {

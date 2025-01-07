@@ -1,0 +1,202 @@
+<?php
+session_start();
+include("../koneksi.php");
+
+if (!isset($_SESSION['id_user'])) {
+  echo "<script>alert('Anda belum login');window.location.href='../auth/login.php';</script>";
+}
+
+$userId = $_SESSION['id_user'];
+$query = "SELECT * FROM tb_user WHERE id_user='$userId'";
+$result = mysqli_query($koneksi, $query);
+$user = mysqli_fetch_assoc($result);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembayaran</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fcf0ec;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    #root {
+      flex: 1;
+    }
+
+    .checkout {
+      background-color: #f0440d;
+    }
+
+    .checkout:hover {
+      background-color: #ea5200;
+    }
+
+    .hapus {
+      background-color: #ffe2c0;
+      border: #ea5200 2px solid;
+    }
+
+    .hapus:hover {
+      background-color: #fdd6c9;
+    }
+  </style>
+</head>
+
+<body>
+  <nav-component></nav-component>
+  <div id="root" class="container mx-auto p-6 px-16 bg-white shadow-md rounded-lg">
+    <!-- Profile Information -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Alamat Pengiriman</h2>
+      <p class="text-gray-700">
+        <strong>Nama:</strong> <span id="profile-name"><?php echo $user['nama']; ?></span>
+      </p>
+      <p class="text-gray-700">
+        <strong>No Telepon:</strong> <span id="profile-phone"><?php echo $user['no_telp']; ?></span>
+      </p>
+      <p class="text-gray-700">
+        <strong>Alamat:</strong> <span id="profile-address"><?php echo $user['alamat']; ?></span>
+      </p>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cart-items">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+
+    <!-- Additional Charges -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-4">Rincian Pembayaran</h2>
+      <div class="flex justify-between mb-4">
+        <span class="text-gray-700">Biaya Pengiriman:</span>
+        <span class="text-gray-700">Rp 20.000</span>
+      </div>
+      <div class="flex justify-between mb-4">
+        <span class="text-gray-700">Voucher:</span>
+        <span class="text-gray-700">-Rp 10.000</span>
+      </div>
+      <div class="flex justify-between mb-4">
+        <span class="text-gray-700">Biaya Admin:</span>
+        <span class="text-gray-700">Rp 5.000</span>
+      </div>
+      <div class="flex justify-between mb-4">
+        <span class="text-gray-700">Metode Pembayaran:</span>
+        <span class="text-gray-700">COD</span>
+      </div>
+    </div>
+
+    <!-- Total Price -->
+    <div class="flex justify-end items-center mt-4 gap-4">
+      <span class="text-xl font-semibold">Total (<span id="total-items">0</span> Produk):
+        <span id="total-price">Rp 0</span></span>
+      <button class="checkout px-6 py-2 text-white rounded-xl" onclick="alert('Pesanan berhasil dibuat!'),sendOrderToWhatsApp()">
+        Buat Pesanan
+      </button>
+    </div>
+  </div>
+  <footer-component></footer-component>
+  <script>
+    function updateTotalPrice() {
+      const cartItems = document.querySelectorAll(".cart-item");
+      let totalPrice = 0;
+      let totalItems = 0;
+      cartItems.forEach((item) => {
+        const quantity = parseInt(item.querySelector(".item-quantity").textContent);
+        const price = parseInt(item.querySelector(".item-price").dataset.price);
+        totalPrice += quantity * price;
+        totalItems += quantity;
+      });
+      const shippingCost = 20000;
+      const voucher = -10000;
+      const adminFee = 5000;
+      totalPrice += shippingCost + voucher + adminFee;
+      document.getElementById("total-price").textContent = formatPrice(totalPrice);
+      document.getElementById("total-items").textContent = totalItems;
+    }
+
+    function formatPrice(price) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        minimumFractionDigits: 0,
+      }).format(price).replace("Rp", "Rp ");
+    }
+
+    function loadCartItems() {
+      const cartItemsContainer = document.getElementById("cart-items");
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+      cartItems.forEach((item) => {
+        const cartItemElement = document.createElement("div");
+        cartItemElement.classList.add(
+          "md:flex",
+          "items-center",
+          "justify-between",
+          "border-b",
+          "pb-4",
+          "mb-4",
+          "cart-item"
+        );
+
+        cartItemElement.innerHTML = `
+            <img src="${item.image}" alt="Item Image" class="w-24 h-24 object-cover rounded-lg" />
+            <div class="">
+              <h3 class="text-lg font-semibold text-left w-40">${item.name}</h3>
+              <p>Warna : <span class="item-color">${item.color}</span></p>
+            </div>
+            <span class="text-lg font-semibold w-32 item-price" data-price="${item.price}">${formatPrice(item.price)}</span>
+            <span class="item-quantity">${item.quantity}</span>
+            <span class="text-lg font-semibold w-32 item-price">${formatPrice(item.quantity * item.price)}</span>
+          `;
+
+        cartItemsContainer.appendChild(cartItemElement);
+      });
+
+      updateTotalPrice();
+    }
+
+    function sendOrderToWhatsApp() {
+      const profileName = document.getElementById("profile-name").textContent;
+      const profilePhone = document.getElementById("profile-phone").textContent;
+      const profileAddress = document.getElementById("profile-address").textContent;
+      const totalItems = document.getElementById("total-items").textContent;
+      const totalPrice = document.getElementById("total-price").textContent;
+
+      let orderMessage = `Halo, saya ingin memesan:\n\n`;
+      document.querySelectorAll(".cart-item").forEach((item) => {
+        const name = item.querySelector("h3").textContent;
+        const color = item.querySelector(".item-color").textContent;
+        const quantity = item.querySelector(".item-quantity").textContent;
+        const price = item.querySelector(".item-price").textContent;
+        orderMessage += `- ${name}\n  Warna: ${color}\n  Jumlah: ${quantity}\n  Harga: ${price}\n\n`;
+      });
+
+      orderMessage += `Total Produk: ${totalItems}\n`;
+      orderMessage += `Total Harga: ${totalPrice}\n\n`;
+      orderMessage += `Nama: ${profileName}\n`;
+      orderMessage += `No Telepon: ${profilePhone}\n`;
+      orderMessage += `Alamat: ${profileAddress}\n`;
+
+      const whatsappUrl = `https://wa.me/6287756809458?text=${encodeURIComponent(orderMessage)}`;
+      window.open(whatsappUrl, "_blank");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadCartItems();
+      updateTotalPrice();
+    });
+  </script>
+  <script src="../component/nav-component.js"></script>
+  <script src="../component/footer-component.js"></script>
+</body>
+
+</html>
