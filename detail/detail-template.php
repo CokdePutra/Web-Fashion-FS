@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <!-- Add to Cart -->
                     <div class="flex gap-4 pt-4">
-                        <form method="POST" action="">
+                        <form method="POST" action="../cart/cart.php">
                             <input type="hidden" name="color" value="Hitam" id="selectedColor">
                             <button
                                 type="submit"
