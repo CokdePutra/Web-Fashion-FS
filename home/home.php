@@ -88,24 +88,24 @@
       <div
         class="text-3xl md:text-4xl"
         onclick="window.location.href='../auth/login.html'">
-        <img src="/img/logo_FH.png" alt="FH" class="h-8 inline-block mr-2" />
+        <img src="../img/logo_FH.png" alt="FH" class="h-8 inline-block mr-2" />
         Fashion Hub
       </div>
 
       <!-- Icon and Login/Register Section -->
       <div class="flex items-center space-x-4 hidden md:block">
         <button class="p-2 rounded-full hover:bg-gray-100">
-          <img src="/img/icon/search.png" alt="Search" class="h-6" />
+          <img src="../img/icon/search.png" alt="Search" class="h-6" />
         </button>
         <button
           class="p-2 rounded-full hover:bg-gray-100"
           onclick="window.location.href='../auth/login.html';">
-          <img src="/img/icon/profile.png" alt="Account" class="h-6" />
+          <img src="../img/icon/profile.png" alt="Account" class="h-6" />
         </button>
         <button
           class="p-2 rounded-full hover:bg-gray-100"
           onclick="window.location.href='../auth/login.html';">
-          <img src="/img/icon/cart.png" alt="Cart" class="h-6" />
+          <img src="../img/icon/cart.png" alt="Cart" class="h-6" />
         </button>
         <a
           href="../auth/regis.html"
@@ -128,7 +128,7 @@
             Lihat Semua
           </a>
           <a href="../pages/pakaian.html" class="px-2 text-sm mt-20 mb-6">
-            <img src="/img/icon/arrow.png" alt="Instagram" class="h-6" />
+            <img src="../img/icon/arrow.png" alt="Instagram" class="h-6" />
           </a>
         </div>
       </div>
@@ -139,7 +139,7 @@
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out"
           onclick="window.location.href='/detail/jemy-top.html'">
           <img
-            src="/img/pakaian/jemy-top.png"
+            src="../img/pakaian/jemy-top.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jemy Top</span>
@@ -148,7 +148,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/nara-top.png"
+            src="../img/pakaian/nara-top.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Nara Top</span>
@@ -157,7 +157,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/short-sleeve.png"
+            src="../img/pakaian/short-sleeve.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Short Sleeve Cotton Linnear</span>
@@ -166,7 +166,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/jasmine-skirt.png"
+            src="../img/pakaian/jasmine-skirt.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jasmine Skirt</span>
@@ -175,7 +175,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/rok-span.png"
+            src="../img/pakaian/rok-span.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Rok Span Wanita</span>
@@ -184,7 +184,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/rubi-top-cotton.png"
+            src="../img/pakaian/rubi-top-cotton.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Rubi Top Cotton</span>
@@ -193,7 +193,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/kulot-cotton.png"
+            src="../img/pakaian/kulot-cotton.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Kulot Cotton</span>
@@ -202,7 +202,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/multiway-shirt.png"
+            src="../img/pakaian/multiway-shirt.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Multi Way Shirt</span>
@@ -211,7 +211,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/wafel-knit-slit-kulot.png"
+            src="../img/pakaian/wafel-knit-slit-kulot.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Wafel Knit Slit Kulot</span>
@@ -220,7 +220,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/pakaian/jemy-top2.png"
+            src="../img/pakaian/jemy-top2.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jemy Top</span>
@@ -237,7 +237,7 @@
             class="text-sm mt-20 mb-6"
             onclick="alert('Masuk Terlebih Dahulu!');">Lihat Semua</a>
           <a href="../pages/aksesoris.html" class="px-2 text-sm mt-20 mb-6">
-            <img src="/img/icon/arrow.png" alt="Instagram" class="h-6" />
+            <img src="../img/icon/arrow.png" alt="Instagram" class="h-6" />
           </a>
         </div>
       </div>
@@ -248,7 +248,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/cincin-wanita-vintage.png"
+            src="../img/aksesoris/cincin-wanita-vintage.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Cincin Wanita Vintage</span>
@@ -257,7 +257,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/anting-wanita-korea.png"
+            src="../img/aksesoris/anting-wanita-korea.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Anting Wanita Korea, Elegan</span>
@@ -266,7 +266,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/kalung-bintang-resin.png"
+            src="../img/aksesoris/kalung-bintang-resin.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Kalung Bintang Resin</span>
@@ -275,7 +275,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/jepit-rambut-crome.png"
+            src="../img/aksesoris/jepit-rambut-crome.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jepit Rambut Crome</span>
@@ -284,7 +284,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/sabuk-wanita-vintage.png"
+            src="../img/aksesoris/sabuk-wanita-vintage.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Sabuk Wanita Vintage</span>
@@ -293,7 +293,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/set-kalung-mutiara.png"
+            src="../img/aksesoris/set-kalung-mutiara.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Set Kalung Mutiara</span>
@@ -302,7 +302,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/anting-wanita-kekinian.png"
+            src="../img/aksesoris/anting-wanita-kekinian.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Anting Wanita Kekinian</span>
@@ -311,7 +311,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/cincin-bentuk.png"
+            src="../img/aksesoris/cincin-bentuk.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jemy Top</span>
@@ -320,7 +320,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/jepitan-rambut-wanita-set.png"
+            src="../img/aksesoris/jepitan-rambut-wanita-set.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Jepitan Rambut Wanita Set</span>
@@ -329,7 +329,7 @@
         <div
           class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out">
           <img
-            src="/img/aksesoris/cincin-resin-set.png"
+            src="../img/aksesoris/cincin-resin-set.png"
             alt="Product Name"
             class="mb-4" />
           <span class="text-lg mx-3">Cincin Resin Set</span>
@@ -343,7 +343,7 @@
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-around items-center my-10">
         <div class="flex flex-col sm:flex-row mb-4 sm:mb-0">
           <div class="m-5 flex justify-center items-center hidden md:block">
-            <img src="/img/logo_FH.png" alt="Fashion Hub Logo" class="h-14" />
+            <img src="../img/logo_FH.png" alt="Fashion Hub Logo" class="h-14" />
           </div>
           <div class="m-5">
             <span class="text-xl sm:text-4xl font-bold">Fashion Hub</span>
@@ -359,15 +359,15 @@
           <div class="flex justify-center mt-3">
             <a href="https://instagram.com" class="px-2">
               <img
-                src="/img/icon/instagram.png"
+                src="../img/icon/instagram.png"
                 alt="Instagram"
                 class="h-6" />
             </a>
             <a href="https://facebook.com" class="px-2">
-              <img src="/img/icon/facebook.png" alt="Facebook" class="h-6" />
+              <img src="../img/icon/facebook.png" alt="Facebook" class="h-6" />
             </a>
             <a href="https://twitter.com" class="px-2">
-              <img src="/img/icon/twitter.png" alt="Twitter" class="h-6" />
+              <img src="../img/icon/twitter.png" alt="Twitter" class="h-6" />
             </a>
           </div>
         </div>

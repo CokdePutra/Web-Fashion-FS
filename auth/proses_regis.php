@@ -19,7 +19,7 @@ $cek_row_user = mysqli_num_rows($hasil_user);
 
 if ($cek_row_user > 0) {
     echo "<script>
-    alert('Maaf Username sudah di Registrasi, Silahkan ganti Username ');
+    alert('Maaf Email sudah di Registrasi, Silahkan ganti Email ');
     location.href='regis.php';
     </script>";
 } else {

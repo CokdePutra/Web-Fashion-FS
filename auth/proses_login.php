@@ -22,7 +22,7 @@ if ($cek_user > 0 && password_verify($password, $row['password'])) {
         $_SESSION['id_user'] = $row['id_user'];
         $_SESSION['level_user'] = $row['level_user'];
 
-        header("location:../home/home.php");
+        header("location:../home/homes.php");
     }
 } else {
     echo "<script>alert('Maaf Password atau Username Anda salah');location.href='login.php'</script>";

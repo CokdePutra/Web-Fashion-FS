@@ -22,44 +22,44 @@ class NavComponent extends HTMLElement {
         id="menu"
         class="hidden absolute bg-white shadow-md flex-col items-start py-2 top-0 left-0 rounded-lg space-y-2 px-4 w-full md:w-auto z-50">
         <a
-          href="../pages/pakaian.html"
+          href="../pages/pakaian.php"
           class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 w-full"
           >Pakaian</a
         >
         <a
-          href="../pages/aksesoris.html"
+          href="../pages/aksesoris.php"
           class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 w-full"
           >Aksesoris</a
         >
-        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../user/profile.html'">
-          <img src="/img/icon/profile.png" alt="Account" class="h-6" />
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../user/profile.php'">
+          <img src="../img/icon/profile.png" alt="Account" class="h-6" />
         </button>
-        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.html'">
-          <img src="/img/icon/cart.png" alt="Cart" class="h-6" />
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.php'">
+          <img src="../img/icon/cart.png" alt="Cart" class="h-6" />
         </button>
       </div>
       <!-- Links Section -->
       <div class="flex items-center space-x-4 hidden md:block">
-        <a href="../pages/pakaian.html" class="text-l uppercase hover:text-gray-500">Pakaian</a>
-        <a href="../pages/aksesoris.html" class="text-l uppercase hover:text-gray-500">Aksesoris</a>
+        <a href="../pages/pakaian.php" class="text-l uppercase hover:text-gray-500">Pakaian</a>
+        <a href="../pages/aksesoris.php" class="text-l uppercase hover:text-gray-500">Aksesoris</a>
       </div>
 
       <!-- Logo Section -->
-      <div class="text-3xl md:text-4xl" onclick="window.location.href='../home/homes.html'">
-        <img src="/img/logo_FH.png" alt="FH" class="h-8 inline-block mr-2" />
+      <div class="text-3xl md:text-4xl" onclick="window.location.href='../home/homes.php'">
+        <img src="../img/logo_FH.png" alt="FH" class="h-8 inline-block mr-2" />
         Fashion Hub
       </div>
 
       <!-- Icon and Login/Register Section -->
       <div class="flex items-center space-x-4 hidden md:block">
         <button class="p-2 rounded-full hover:bg-gray-100">
-          <img src="/img/icon/search.png" alt="Search" class="h-6" />
+          <img src="../img/icon/search.png" alt="Search" class="h-6" />
         </button>
-        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../user/profile.html'">
-          <img src="/img/icon/profile.png" alt="Account" class="h-6" />
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../user/profile.php'">
+          <img src="../img/icon/profile.png" alt="Account" class="h-6" />
         </button>
-        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.html'">
-          <img src="/img/icon/cart.png" alt="Cart" class="h-6" />
+        <button class="p-2 rounded-full hover:bg-gray-100" onclick="window.location.href='../cart/cart.php'">
+          <img src="../img/icon/cart.png" alt="Cart" class="h-6" />
         </button>
       </div>
     </nav>`;
