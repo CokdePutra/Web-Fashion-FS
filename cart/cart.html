@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet" />
+    <style>
+      body {
+        background-color: #fcf0ec;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #root {
+        flex: 1;
+      }
+      .checkout {
+        background-color: #f0440d;
+      }
+      .checkout:hover {
+        background-color: #ea5200;
+      }
+      .hapus {
+        background-color: #ffe2c0;
+        border: #ea5200 2px solid;
+      }
+      .hapus:hover {
+        background-color: #fdd6c9;
+      }
+    </style>
+  </head>
+  <body>
+    <nav-component></nav-component>
+    <div
+      id="root"
+      class="container mx-auto p-6 px-16 bg-white shadow-md rounded-lg">
+      <div
+        class="md:flex items-center justify-between border-b pb-4 mb-4 cart-item">
+        <input type="checkbox" class="mr-4" onchange="updateTotalPrice()" />
+        <img
+          src="../img/pakaian/kulot-knit-wanita.png"
+          alt="Item Image"
+          class="w-24 h-24 object-cover rounded-lg" />
+        <div class="">
+          <h3 class="text-lg font-semibold text-left w-40">
+            Kulot Knit Wanita
+          </h3>
+          <p>
+            Warna : <span class="item-color" data-product="kulot-knit"></span>
+          </p>
+        </div>
+        <div class="flex md:items-center md:justify-center m-3">
+          <button
+            class="px-2 py-1 bg-gray-200 rounded-md"
+            onclick="updateQuantity(this, -1)">
+            -
+          </button>
+          <span class="mx-3 item-quantity">1</span>
+          <button
+            class="px-2 py-1 bg-gray-200 rounded-md"
+            onclick="updateQuantity(this, 1)">
+            +
+          </button>
+        </div>
+        <span class="text-lg font-semibold w-32 item-price">Rp 97.000</span>
+        <button
+          class="hapus px-4 py-2 m-3 bg-red-500 text-black rounded-xl"
+          onclick="removeItem(this)">
+          Hapus
+        </button>
+      </div>
+      <div
+        class="md:flex items-center justify-between border-b pb-4 mb-4 cart-item">
+        <input type="checkbox" class="mr-4" onchange="updateTotalPrice()" />
+        <img
+          src="../img/aksesoris/set-kalung-mutiara.png"
+          alt="Item Image"
+          class="w-24 h-24 object-cover rounded-lg" />
+        <div class="">
+          <h3 class="text-lg font-semibold text-left w-40">
+            Set Kalung Mutiara
+          </h3>
+          <p>
+            Warna :
+            <span class="item-color" data-product="set-kalung-mutiara"></span>
+          </p>
+        </div>
+        <div class="flex md:items-center md:justify-center m-3">
+          <button
+            class="px-2 py-1 bg-gray-200 rounded-md"
+            onclick="updateQuantity(this, -1)">
+            -
+          </button>
+          <span class="mx-3 item-quantity">1</span>
+          <button
+            class="px-2 py-1 bg-gray-200 rounded-md"
+            onclick="updateQuantity(this, 1)">
+            +
+          </button>
+        </div>
+        <span class="text-lg font-semibold w-32 item-price">Rp 30.000</span>
+        <button
+          class="hapus px-4 py-2 m-3 text-black rounded-xl"
+          onclick="removeItem(this)">
+          Hapus
+        </button>
+      </div>
+      <!-- Repeat .flex for more items -->
+      <div class="flex justify-end items-center mt-4 gap-4">
+        <span class="text-xl font-semibold"
+          >Total (<span id="total-items">0</span> Produk):
+          <span id="total-price">Rp 0</span></span
+        >
+        <button
+          class="checkout px-6 py-2 text-white rounded-xl"
+          onclick="proceedToCheckout()">
+          Checkout
+        </button>
+      </div>
+    </div>
+    <footer-component></footer-component>
+    <script>
+      function updateQuantity(button, change) {
+        const quantitySpan =
+          button.parentElement.querySelector(".item-quantity");
+        let currentQuantity = parseInt(quantitySpan.textContent);
+        currentQuantity += change;
+        if (currentQuantity < 1) currentQuantity = 1;
+        quantitySpan.textContent = currentQuantity;
+        updateTotalPrice();
+      }
+
+      function removeItem(button) {
+        const cartItem = button.closest(".cart-item");
+        cartItem.remove();
+        updateTotalPrice();
+      }
+
+      function updateTotalPrice() {
+        const cartItems = document.querySelectorAll(".cart-item");
+        let totalPrice = 0;
+        let totalItems = 0;
+        cartItems.forEach((item) => {
+          const checkbox = item.querySelector("input[type='checkbox']");
+          if (checkbox.checked) {
+            const quantity = parseInt(
+              item.querySelector(".item-quantity").textContent
+            );
+            const price = parseInt(
+              item.querySelector(".item-price").dataset.price
+            );
+            totalPrice += quantity * price;
+            totalItems += quantity;
+          }
+        });
+        document.getElementById("total-price").textContent =
+          formatPrice(totalPrice);
+        document.getElementById("total-items").textContent = totalItems;
+      }
+
+      function formatPrice(price) {
+        return new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          minimumFractionDigits: 0,
+        })
+          .format(price)
+          .replace("IDR", "Rp ");
+      }
+
+      document.querySelectorAll(".item-price").forEach((priceElement) => {
+        const price = parseInt(priceElement.textContent.replace(/\D/g, ""));
+        priceElement.textContent = formatPrice(price);
+        priceElement.dataset.price = price;
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".item-color").forEach((colorElement) => {
+          const productKey = colorElement.dataset.product;
+          const selectedColor = localStorage.getItem(
+            `${productKey}-selectedColor`
+          );
+          if (selectedColor) {
+            colorElement.textContent = selectedColor;
+            localStorage.removeItem(`${productKey}-selectedColor`);
+          }
+        });
+      });
+
+      function proceedToCheckout() {
+        const cartItems = [];
+        document.querySelectorAll(".cart-item").forEach((item) => {
+          const image = item.querySelector("img").src;
+          const name = item.querySelector("h3").textContent;
+          const color = item.querySelector(".item-color").textContent;
+          const price = parseInt(
+            item.querySelector(".item-price").dataset.price
+          );
+          const quantity = parseInt(
+            item.querySelector(".item-quantity").textContent
+          );
+          cartItems.push({ image, name, color, price, quantity });
+        });
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        window.location.href = "../cart/pembayaran.html";
+      }
+    </script>
+    <script src="../component/nav-component.js"></script>
+    <script src="../component/footer-component.js"></script>
+  </body>
+</html>

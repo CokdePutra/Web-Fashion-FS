@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kulot Knit - Detail Produk</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet" />
+    <style>
+      body {
+        background-color: #fcf0ec;
+      }
+      .tambahKeranjang {
+        background-color: #fdd6c9;
+        border: #f0440d 2px solid;
+      }
+      .tambahKeranjang:hover {
+        background-color: #fcbba1;
+      }
+    </style>
+  </head>
+  <body>
+    <nav-component></nav-component>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Product Images -->
+          <div class="space-y-4">
+            <div class="aspect-w-1 aspect-h-1 w-full">
+              <img
+                src="../img/detail/set-kalung-mutiara/1.png"
+                alt="Jemy Top"
+                class="w-full h-96 object-cover rounded-lg" />
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+              <img
+                src="../img/detail/set-kalung-mutiara/1.png"
+                alt="Thumbnail 1"
+                class="w-full h-24 object-cover rounded-lg cursor-pointer" />
+              <img
+                src="../img/detail/set-kalung-mutiara/2.png"
+                alt="Thumbnail 2"
+                class="w-full h-24 object-cover rounded-lg cursor-pointer" />
+              <img
+                src="../img/detail/set-kalung-mutiara/3.png"
+                alt="Thumbnail 3"
+                class="w-full h-24 object-cover rounded-lg cursor-pointer" />
+              <img
+                src="../img/detail/set-kalung-mutiara/4.png"
+                alt="Thumbnail 4"
+                class="w-full h-24 object-cover rounded-lg cursor-pointer" />
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="space-y-4">
+            <h1 class="text-3xl font-semibold">
+              Set Kalung Mutiara | Kalung Ala Korea
+            </h1>
+            <p class="text-4xl font-semibold text-black-600">Rp 30.000</p>
+            <h3 class="text-lg font-medium mb-2">Deskripsi Produk</h3>
+            <p class="text-gray-600">
+              Terbuat dari mutiara dengan kualitas terbaik dan terlihat sangat
+              elegan.
+            </p>
+
+            <!-- Color Selection -->
+            <div>
+              <h3 class="text-lg font-medium mb-2">Pilih Warna</h3>
+              <div class="flex items-center gap-4">
+                <label class="cursor-pointer">
+                  <input
+                    type="radio"
+                    name="color"
+                    value="Gold"
+                    class="hidden peer"
+                    onclick="updateSelectedColor(this)" />
+                  <div
+                    class="w-8 h-8 bg-yellow-100 rounded-full border-2 border-transparent peer-checked:border-blue-500 hover:border-gray-300"></div>
+                  <span class="block text-xs text-center mt-1">Gold</span>
+                </label>
+                <label class="cursor-pointer">
+                  <input
+                    type="radio"
+                    name="color"
+                    value="Silver"
+                    class="hidden peer"
+                    onclick="updateSelectedColor(this)" />
+                  <div
+                    class="w-8 h-8 bg-white rounded-full border-2 border-transparent peer-checked:border-blue-500 hover:border-gray-300"></div>
+                  <span class="block text-xs text-center mt-1">Silver</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Size Selection -->
+            <div>
+              <h3 class="text-lg font-medium mb-2">Pilih Ukuran</h3>
+              <div class="flex gap-4">
+                <button
+                  class="px-4 py-2 border rounded-md hover:border-blue-500 size-button"
+                  onclick="updateSelectedSize(this)">
+                  One Size
+                </button>
+              </div>
+            </div>
+
+            <!-- Add to Cart -->
+            <div class="flex gap-4 pt-4">
+              <button
+                class="tambahKeranjang flex-1 text-black py-3 rounded-md flex items-center justify-center gap-2"
+                onclick="addToCart('set-kalung-mutiara')">
+                <img
+                  src="../img/icon/cart.png"
+                  alt="Cart Icon"
+                  class="w-8 h-8" />
+                Masukan Keranjang
+              </button>
+              <!-- <button
+                class="flex-1 bg-green-600 text-white py-3 rounded-md hover:bg-green-700">
+                Beli Sekarang
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer-component></footer-component>
+    <script src="../component/nav-component.js"></script>
+    <script src="../component/footer-component.js"></script>
+    <script>
+      function updateSelectedColor(selectedInput) {
+        const labels = document.querySelectorAll("label.cursor-pointer");
+        labels.forEach((label) => {
+          const input = label.querySelector("input");
+          const div = label.querySelector("div");
+          if (input === selectedInput) {
+            div.classList.add("border-4", "border-blue-500");
+          } else {
+            div.classList.remove("border-4", "border-blue-500");
+          }
+        });
+      }
+
+      function updateSelectedSize(selectedButton) {
+        const buttons = document.querySelectorAll(".size-button");
+        buttons.forEach((button) => {
+          if (button === selectedButton) {
+            button.classList.add("border-4", "border-blue-500");
+          } else {
+            button.classList.remove("border-4", "border-blue-500");
+          }
+        });
+      }
+
+      function addToCart(productKey) {
+        const selectedColor = document.querySelector(
+          'input[name="color"]:checked'
+        ).value;
+        localStorage.setItem(`${productKey}-selectedColor`, selectedColor);
+        setRandomColorsForOtherItems();
+        window.location.href = "../cart/cart.html";
+      }
+
+      function setRandomColorsForOtherItems() {
+        const items = [
+          { key: "kulot-knit", colors: ["Hitam", "Cream", "Putih"] },
+          // Add other items here with their respective colors
+        ];
+
+        items.forEach((item) => {
+          const randomColor =
+            item.colors[Math.floor(Math.random() * item.colors.length)];
+          localStorage.setItem(`${item.key}-selectedColor`, randomColor);
+        });
+      }
+    </script>
+  </body>
+</html>

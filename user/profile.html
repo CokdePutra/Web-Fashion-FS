@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet" />
+    <style>
+      .label-width {
+        display: inline-block;
+        width: 120px;
+      }
+      body {
+        background-color: #fcf0ec;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #root {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- navbar component  -->
+      <nav-component></nav-component>
+
+      <div class="max-w-3xl mx-auto mt-12 bg-white p-4 md:p-8 shadow-lg">
+        <div class="flex flex-col md:flex-row-reverse gap-8 relative">
+          <div
+            class="flex-shrink-0 flex flex-col items-center md:justify-center md:items-center pb-6 md:pb-0 md:pl-8 md:ml-2 border-b md:border-b-0 md:border-l border-gray-300">
+            <img
+              class="rounded-full w-36 h-36"
+              src="../img/aksesoris/jepitan-rambut-wanita-set.png"
+              alt="Profile Picture" />
+            <button
+              class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+              Pilih Gambar
+            </button>
+          </div>
+          <div class="flex-grow">
+            <div class="mb-6">
+              <h1 class="text-2xl font-bold">Profile Saya</h1>
+              <p class="text-gray-600">
+                Kelola informasi profil Anda untuk mengontrol, melindungi dan
+                mengamankan akun
+              </p>
+            </div>
+            <div class="">
+              <h2 class="text-xl font-semibold">User Information</h2>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">Nama:</strong>
+                <input
+                  type="text"
+                  value="Ayu Putri"
+                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+              </p>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">Email:</strong>
+                <input
+                  type="email"
+                  value="ayuputri@gmail.com"
+                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+              </p>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">No Telepon:</strong>
+                <input
+                  type="tel"
+                  value="(+62) 98765432176"
+                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+              </p>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">Jenis Kelamin:</strong>
+                <span class="inline-flex gap-4">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Laki-laki"
+                      checked
+                      class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
+                    <span class="ml-2">Laki-laki</span>
+                  </label>
+                  <label class="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Perempuan"
+                      class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
+                    <span class="ml-2">Perempuan</span>
+                  </label>
+                </span>
+              </p>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">Tanggal Lahir:</strong>
+                <input
+                  type="date"
+                  value="1990-01-01"
+                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent px-0" />
+              </p>
+              <p class="mt-4 text-gray-700">
+                <strong class="label-width">Alamat:</strong>
+                <input
+                  type="text"
+                  value="Jl. Mawar No. 123, RT 01/RW 02,Kelurahan Cempaka Putih,Kecamatan Cempaka,Kota Jakarta Pusat, DKI Jakarta,10510"
+                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+              </p>
+              <div class="mt-8 flex justify-start">
+                <button
+                  class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                  onclick="alert('Data berhasil disimpan'), window.location.href = '../home/homes.html'">
+                  Simpan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- footer component -->
+      <footer-component></footer-component>
+
+      <script src="../component/nav-component.js"></script>
+      <script src="../component/footer-component.js"></script>
+    </div>
+  </body>
+</html>
