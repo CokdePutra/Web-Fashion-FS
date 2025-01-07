@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <img
                             src="<?php echo $product['src']; ?>"
                             alt="<?php echo $product['nama_produk']; ?>"
-                            class="w-full h-96 object-cover rounded-lg" />
+                            class="w-full h-full object-cover rounded-lg" />
                     </div>
                     <!-- <div class="grid grid-cols-4 gap-4">
                         <img
@@ -153,11 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <!-- Add to Cart -->
                     <div class="flex gap-4 pt-4">
-                        <form method="POST" action="../cart/cart.php">
+                        <form method="POST" action="">
                             <input type="hidden" name="color" value="Hitam" id="selectedColor">
                             <button
                                 type="submit"
-                                class="tambahKeranjang flex-1 text-black py-3 rounded-md flex items-center justify-center gap-2 px-4">
+                                class="tambahKeranjang flex-1 text-black py-3 rounded-md flex items-center justify-center gap-2 px-6">
                                 <img
                                     src="../img/icon/cart.png"
                                     alt="Cart Icon"

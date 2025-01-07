@@ -7,7 +7,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $userId = $_SESSION['id_user'];
-$query = "SELECT cart.*, tb_produk.nama_produk, tb_produk.src, tb_produk.harga FROM cart JOIN tb_produk ON cart.product_id = tb_produk.id_produk WHERE cart.user_id='$userId'";
+$query = "SELECT cart.id_cart, cart.*, tb_produk.nama_produk, tb_produk.src, tb_produk.harga FROM cart JOIN tb_produk ON cart.product_id = tb_produk.id_produk WHERE cart.user_id='$userId'";
 $result = mysqli_query($koneksi, $query);
 ?>
 
@@ -59,7 +59,7 @@ $result = mysqli_query($koneksi, $query);
     class="container mx-auto p-6 px-16 bg-white shadow-md rounded-lg">
     <div id="cart-items-container">
       <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-        <div class="md:flex items-center justify-between border-b pb-4 mb-4 cart-item" data-product-id="<?php echo $row['product_id']; ?>">
+        <div class="md:flex items-center justify-between border-b pb-4 mb-4 cart-item" data-id-cart="<?php echo $row['id_cart']; ?>">
           <input type="checkbox" class="mr-4" onchange="updateTotalPrice()" />
           <img src="<?php echo $row['src']; ?>" alt="Item Image" class="w-24 h-24 object-cover rounded-lg" />
           <div class="">
@@ -96,11 +96,11 @@ $result = mysqli_query($koneksi, $query);
       quantitySpan.textContent = currentQuantity;
       updateTotalPrice();
 
-      const productId = button.closest(".cart-item").dataset.productId;
+      const cartId = button.closest(".cart-item").dataset.idCart;
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "update_cart.php", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.send(`product_id=${productId}&quantity=${currentQuantity}`);
+      xhr.send(`product_id=${cartId}&quantity=${currentQuantity}`);
     }
 
     function confirmRemoveItem(button) {
@@ -111,11 +111,11 @@ $result = mysqli_query($koneksi, $query);
 
     function removeItem(button) {
       const cartItem = button.closest(".cart-item");
-      const productId = cartItem.dataset.productId;
+      const cartId = cartItem.dataset.idCart;
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "remove_cart.php", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.send(`product_id=${productId}`);
+      xhr.send(`id_cart=${cartId}`);
       cartItem.remove();
       updateTotalPrice();
     }
