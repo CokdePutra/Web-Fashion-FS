@@ -7,10 +7,10 @@ if (!isset($_SESSION['nama'])) {
 
 include("../koneksi.php");
 
-$query_pakaian = "SELECT * FROM tb_produk WHERE tipe='pakaian'";
+$query_pakaian = "SELECT * FROM tb_produk WHERE tipe='pakaian' LIMIT 10";
 $result_pakaian = mysqli_query($koneksi, $query_pakaian);
 
-$query_aksesoris = "SELECT * FROM tb_produk WHERE tipe='aksesoris'";
+$query_aksesoris = "SELECT * FROM tb_produk WHERE tipe='aksesoris' LIMIT 10";
 $result_aksesoris = mysqli_query($koneksi, $query_aksesoris);
 ?>
 
@@ -71,7 +71,7 @@ $result_aksesoris = mysqli_query($koneksi, $query_aksesoris);
         <?php while ($row = mysqli_fetch_assoc($result_pakaian)) { ?>
           <div
             class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out"
-            onclick="goToDetail('<?php echo $row['nama_produk']; ?>')">
+            onclick="goToDetail('<?php echo $row['id_produk']; ?>')">
             <img
               src="<?php echo $row['src']; ?>"
               alt="<?php echo $row['nama_produk']; ?>"
@@ -96,7 +96,7 @@ $result_aksesoris = mysqli_query($koneksi, $query_aksesoris);
         <?php while ($row = mysqli_fetch_assoc($result_aksesoris)) { ?>
           <div
             class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out"
-            onclick="goToDetail('<?php echo $row['nama_produk']; ?>')">
+            onclick="goToDetail('<?php echo $row['id_produk']; ?>')">
             <img
               src="<?php echo $row['src']; ?>"
               alt="<?php echo $row['nama_produk']; ?>"
@@ -132,10 +132,9 @@ $result_aksesoris = mysqli_query($koneksi, $query_aksesoris);
         }
       });
 
-      // Function to generate detail page URL based on product name
-      function goToDetail(productName) {
-        const formattedName = productName.toLowerCase().replace(/ /g, '-');
-        window.location.href = `../detail/detail-template.php?product=${formattedName}`;
+      // Function to generate detail page URL based on product ID
+      function goToDetail(productId) {
+        window.location.href = `../detail/detail-template.php?product=${productId}`;
       }
     </script>
     <script src="../component/nav-component.js"></script>

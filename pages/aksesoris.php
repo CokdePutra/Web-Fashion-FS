@@ -47,14 +47,14 @@ $result = mysqli_query($koneksi, $query);
     <!-- navbar component  -->
     <nav-component></nav-component>
 
-    <!-- Aksesoris -->
+    <!-- Akssoris -->
     <main class="px-8 roboto-regular">
       <h2 class="text-2xl mt-20 mb-6">Koleksi Aksesoris</h2>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-6 mx-2 lg:mx-20">
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
           <div
             class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out"
-            onclick="goToDetail('<?php echo $row['nama_produk']; ?>')">
+            onclick="goToDetail('<?php echo $row['id_produk']; ?>')">
             <img
               src="<?php echo $row['src']; ?>"
               alt="<?php echo $row['nama_produk']; ?>"
@@ -70,10 +70,9 @@ $result = mysqli_query($koneksi, $query);
     <footer-component></footer-component>
 
     <script>
-      // Function to generate detail page URL based on product name
-      function goToDetail(productName) {
-        const formattedName = productName.toLowerCase().replace(/ /g, '-');
-        window.location.href = `../detail/detail-template.php?product=${formattedName}`;
+      // Function to generate detail page URL based on product ID
+      function goToDetail(productId) {
+        window.location.href = `../detail/detail-template.php?product=${productId}`;
       }
 
       // Get references to menu button and dropdown menu

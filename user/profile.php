@@ -18,12 +18,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $jenis_kelamin = $_POST['jenis_kelamin'];
   $tanggal_lahir = $_POST['tanggal_lahir'];
   $alamat = $_POST['alamat'];
+  $profile_picture = $user['profile_picture'];
 
-  $update_query = "UPDATE tb_user SET nama='$nama', email='$email', no_telp='$no_telp', jenis_kelamin='$jenis_kelamin', tanggal_lahir='$tanggal_lahir', alamat='$alamat' WHERE id_user='$id_user'";
+  if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
+    $target_dir = "../uploads/";
+    if (!is_dir($target_dir)) {
+      mkdir($target_dir, 0777, true);
+    }
+    $target_file = $target_dir . basename($_FILES["profile_picture"]["name"]);
+    if (move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_file)) {
+      $profile_picture = $target_file;
+    } else {
+      echo "<script>alert('Gagal mengunggah gambar');</script>";
+    }
+  }
+
+  $update_query = "UPDATE tb_user SET nama='$nama', email='$email', no_telp='$no_telp', jenis_kelamin='$jenis_kelamin', tanggal_lahir='$tanggal_lahir', alamat='$alamat', profile_picture='$profile_picture' WHERE id_user='$id_user'";
   $update_result = mysqli_query($koneksi, $update_query);
 
   if ($update_result) {
-    echo "<script>alert('Data berhasil disimpan');</script>";
+    echo "<script>alert('Data berhasil disimpan');window.location.href='../home/homes.php';</script>";
   } else {
     echo "<script>alert('Gagal menyimpan data');</script>";
   }
@@ -70,12 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           class="flex-shrink-0 flex flex-col items-center md:justify-center md:items-center pb-6 md:pb-0 md:pl-8 md:ml-2 border-b md:border-b-0 md:border-l border-gray-300">
           <img
             class="rounded-full w-36 h-36"
-            src="../img/aksesoris/jepitan-rambut-wanita-set.png"
+            src="<?php echo $user['profile_picture'] ? $user['profile_picture'] : '../img/aksesoris/jepitan-rambut-wanita-set.png'; ?>"
             alt="Profile Picture" />
-          <button
-            class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
-            Pilih Gambar
-          </button>
+          <form method="POST" action="" enctype="multipart/form-data">
+            <input type="file" name="profile_picture" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors" />
         </div>
         <div class="flex-grow">
           <div class="mb-6">
@@ -85,84 +97,79 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               mengamankan akun
             </p>
           </div>
-          <form method="POST" action="">
-            <div class="">
-              <h2 class="text-xl font-semibold">User Information</h2>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Nama:</strong>
-                <input
-                  type="text"
-                  name="nama"
-                  value="<?php echo $user['nama']; ?>"
-                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
-              </p>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Email:</strong>
-                <input
-                  type="email"
-                  name="email"
-                  value="<?php echo $user['email']; ?>"
-                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
-              </p>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">No Telepon:</strong>
-                <input
-                  type="tel"
-                  name="no_telp"
-                  value="<?php echo $user['no_telp']; ?>"
-                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
-              </p>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Jenis Kelamin:</strong>
-                <span class="inline-flex gap-4">
-                  <label class="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="jenis_kelamin"
-                      value="laki-laki"
-                      <?php echo ($user['jenis_kelamin'] == 'laki-laki') ? 'checked' : ''; ?>
-                      class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
-                    <span class="ml-2">Laki-laki</span>
-                  </label>
-                  <label class="inline-flex items-center">
-                    <input
-                      type="radio"
-                      name="jenis_kelamin"
-                      value="perempuan"
-                      <?php echo ($user['jenis_kelamin'] == 'perempuan') ? 'checked' : ''; ?>
-                      class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
-                    <span class="ml-2">Perempuan</span>
-                  </label>
-                </span>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Jenis Kelamin:</strong>
-                <?php echo $user['jenis_kelamin']; ?>
-              </p>
-              </p>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Tanggal Lahir:</strong>
-                <input
-                  type="date"
-                  name="tanggal_lahir"
-                  value="<?php echo $user['tanggal_lahir']; ?>"
-                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent px-0" />
-              </p>
-              <p class="mt-4 text-gray-700">
-                <strong class="label-width">Alamat:</strong>
-                <input
-                  type="text"
-                  name="alamat"
-                  value="<?php echo $user['alamat']; ?>"
-                  class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
-              </p>
-              <div class="mt-8 flex justify-start">
-                <button
-                  type="submit"
-                  class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
-                  Simpan
-                </button>
-              </div>
+          <div class="">
+            <h2 class="text-xl font-semibold">User Information</h2>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">Nama:</strong>
+              <input
+                type="text"
+                name="nama"
+                value="<?php echo $user['nama']; ?>"
+                class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+            </p>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">Email:</strong>
+              <input
+                type="email"
+                name="email"
+                value="<?php echo $user['email']; ?>"
+                class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+            </p>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">No Telepon:</strong>
+              <input
+                type="tel"
+                name="no_telp"
+                value="<?php echo $user['no_telp']; ?>"
+                class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+            </p>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">Jenis Kelamin:</strong>
+              <span class="inline-flex gap-4">
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="jenis_kelamin"
+                    value="laki-laki"
+                    <?php echo ($user['jenis_kelamin'] == 'laki-laki') ? 'checked' : ''; ?>
+                    class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
+                  <span class="ml-2">Laki-laki</span>
+                </label>
+                <label class="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="jenis_kelamin"
+                    value="perempuan"
+                    <?php echo ($user['jenis_kelamin'] == 'perempuan') ? 'checked' : ''; ?>
+                    class="text-blue-500 focus:ring-blue-500 h-4 w-4" />
+                  <span class="ml-2">Perempuan</span>
+                </label>
+              </span>
+            </p>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">Tanggal Lahir:</strong>
+              <input
+                type="date"
+                name="tanggal_lahir"
+                value="<?php echo $user['tanggal_lahir']; ?>"
+                class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent px-0" />
+            </p>
+            <p class="mt-4 text-gray-700">
+              <strong class="label-width">Alamat:</strong>
+              <input
+                type="text"
+                name="alamat"
+                value="<?php echo $user['alamat']; ?>"
+                class="border-b border-gray-300 focus:outline-none focus:border-blue-500 text-gray-700 bg-transparent" />
+            </p>
+            <div class="mt-8 flex justify-start">
+              <button
+                type="submit"
+                class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                Simpan
+              </button>
             </div>
+          </div>
           </form>
         </div>
       </div>

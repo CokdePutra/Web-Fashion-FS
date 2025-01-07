@@ -14,7 +14,7 @@ $result = mysqli_query($koneksi, $query);
   <title>Fahison Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap"
     rel="stylesheet" />
   <style>
     .playfair-display-custom {
@@ -54,7 +54,7 @@ $result = mysqli_query($koneksi, $query);
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
           <div
             class="bg-white rounded-lg flex flex-col cursor-pointer hover:brightness-75 hover:shadow-md transition duration-300 ease-in-out"
-            onclick="goToDetail('<?php echo $row['nama_produk']; ?>')">
+            onclick="goToDetail('<?php echo $row['id_produk']; ?>')">
             <img
               src="<?php echo $row['src']; ?>"
               alt="<?php echo $row['nama_produk']; ?>"
@@ -70,10 +70,9 @@ $result = mysqli_query($koneksi, $query);
     <footer-component></footer-component>
 
     <script>
-      // Function to generate detail page URL based on product name
-      function goToDetail(productName) {
-        const formattedName = productName.toLowerCase().replace(/ /g, '-');
-        window.location.href = `../detail/detail-template.php?product=${formattedName}`;
+      // Function to generate detail page URL based on product ID
+      function goToDetail(productId) {
+        window.location.href = `../detail/detail-template.php?product=${productId}`;
       }
 
       // Get references to menu button and dropdown menu
