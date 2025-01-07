@@ -165,7 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="mt-8 flex justify-start">
               <button
                 type="submit"
-                class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                id="saveButton"
+                class="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors hidden">
                 Simpan
               </button>
             </div>
@@ -179,6 +180,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="../component/nav-component.js"></script>
     <script src="../component/footer-component.js"></script>
+    <script>
+      const initialData = {
+        nama: "<?php echo $user['nama']; ?>",
+        email: "<?php echo $user['email']; ?>",
+        no_telp: "<?php echo $user['no_telp']; ?>",
+        jenis_kelamin: "<?php echo $user['jenis_kelamin']; ?>",
+        tanggal_lahir: "<?php echo $user['tanggal_lahir']; ?>",
+        alamat: "<?php echo $user['alamat']; ?>"
+      };
+
+      const formElements = document.querySelectorAll('input[name="nama"], input[name="email"], input[name="no_telp"], input[name="jenis_kelamin"], input[name="tanggal_lahir"], input[name="alamat"]');
+      formElements.forEach(element => {
+        element.addEventListener('input', checkForChanges);
+      });
+
+      function checkForChanges() {
+        const currentData = {
+          nama: document.querySelector('input[name="nama"]').value,
+          email: document.querySelector('input[name="email"]').value,
+          no_telp: document.querySelector('input[name="no_telp"]').value,
+          jenis_kelamin: document.querySelector('input[name="jenis_kelamin"]:checked').value,
+          tanggal_lahir: document.querySelector('input[name="tanggal_lahir"]').value,
+          alamat: document.querySelector('input[name="alamat"]').value
+        };
+
+        const hasChanges = JSON.stringify(initialData) !== JSON.stringify(currentData);
+        document.getElementById('saveButton').classList.toggle('hidden', !hasChanges);
+      }
+    </script>
   </div>
 </body>
 
