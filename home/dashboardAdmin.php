@@ -5,9 +5,6 @@ session_start();
 // Add this right after session_start()
 $_SESSION['is_admin'] = true; // Explicitly mark as admin
 
-// Debug line to check session variables
-var_dump($_SESSION);
-
 // Get admin name from session
 $admin_name = $_SESSION['nama'] ?? 'Admin';
 
