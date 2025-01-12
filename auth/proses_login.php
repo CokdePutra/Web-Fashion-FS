@@ -16,7 +16,7 @@ if ($cek_user > 0 && password_verify($password, $row['password'])) {
         $_SESSION['id_user'] = $row['id_user'];
         $_SESSION['level_user'] = $row['level_user'];
 
-        header("location:../home/homes.php");
+        header("location:../home/dashboardAdmin.php");
     } elseif ($level_user == "user") {
         $_SESSION['nama'] = $row['nama'];
         $_SESSION['id_user'] = $row['id_user'];
